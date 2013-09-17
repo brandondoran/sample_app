@@ -18,5 +18,5 @@ doc/
 .DS_Store
 .idea
 .secret
-
+.vagrant
 .vagrant
