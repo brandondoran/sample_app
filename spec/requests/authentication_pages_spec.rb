@@ -124,6 +124,14 @@ describe "Authentication" do
         before { patch user_path(wrong_user) }
         specify { expect(response).to redirect_to(root_url) }
       end
+
+      describe "visiting user page should not show micropost delete links" do
+        before do
+          FactoryGirl.create(:micropost, user: wrong_user)
+          visit user_path(wrong_user)
+        end
+        it { should_not have_link('delete') }
+      end
     end
   end
 end
