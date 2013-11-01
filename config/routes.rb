@@ -1,6 +1,10 @@
 SampleApp::Application.routes.draw do
   namespace :api, defaults: {format: 'json'} do
-    namespace :v1 do
+    scope module: :v1 constraints: ApiContstraints.new(version: 1) do
+      resources :users
+      resources :microposts
+    end
+    scope module: :v2 constraints: ApiContstraints.new(version: 2, default: true) do
       resources :users
       resources :microposts
     end
