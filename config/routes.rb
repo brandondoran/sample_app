@@ -1,13 +1,13 @@
 SampleApp::Application.routes.draw do
-  namespace :api, defaults: {format: 'json'} do
-    scope module: :v1 constraints: ApiContstraints.new(version: 1) do
-      resources :users
-      resources :microposts
-    end
-    scope module: :v2 constraints: ApiContstraints.new(version: 2, default: true) do
-      resources :users
-      resources :microposts
-    end
+  # namespace :api, defaults: {format: 'json'} do
+  #   #namespace :v1 do
+  #     resources :users
+  #     resources :microposts
+  #   #end
+  # end
+  scope '/api', defaults: {format: 'json'} do
+    resources :users, only:[:show, :index]
+    resources :microposts, only:[:show]
   end
   
   get "microposts/new"
@@ -20,12 +20,12 @@ SampleApp::Application.routes.draw do
   resources :microposts, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
   root 'static_pages#home'
-  match "/help", to: 'static_pages#help', via: 'get'
-  match "/about", to: 'static_pages#about', via: 'get'
+  match "/help",    to: 'static_pages#help',    via: 'get'
+  match "/about",   to: 'static_pages#about',   via: 'get'
   match "/contact", to: 'static_pages#contact', via: 'get'
-  match "/signup", to: 'users#new', via: 'get'
-  match "/signin", to: 'sessions#new', via: 'get'
-  match "/signout", to: 'sessions#destroy', via: 'delete'
+  match "/signup",  to: 'users#new',            via: 'get'
+  match "/signin",  to: 'sessions#new',         via: 'get'
+  match "/signout", to: 'sessions#destroy',     via: 'delete'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
