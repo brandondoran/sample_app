@@ -8,7 +8,12 @@ module Api
     	end
 
       def show
-        respond_with Micropost.find(params[:id])
+        micropost = Micropost.find(params[:id])
+        if !micropost.nil?
+          respond_with micropost
+        else
+          respond_with status: :not_found
+        end
       end
     end
   end

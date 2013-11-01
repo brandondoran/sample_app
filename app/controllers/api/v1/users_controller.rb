@@ -8,20 +8,13 @@ module Api
       end
       
       def show
-        respond_with User.find(params[:id])
+        user = User.find(params[:id])
+        if !user.nil?
+          respond_with User.find(params[:id])
+        else
+          respond_with status: :not_found
+        end
       end
-      
-      # def create
-      #   respond_with User.create(params[:product])
-      # end
-      
-      # def update
-      #   respond_with User.update(params[:id], params[:products])
-      # end
-      
-      # def destroy
-      #   respond_with User.destroy(params[:id])
-      # end
     end
   end
 end
