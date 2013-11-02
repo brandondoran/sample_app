@@ -13,3 +13,11 @@ def sign_in(user, options={})
     click_button "Sign in"
   end
 end
+
+module Requests
+  module JsonHelpers
+    def json
+      @json ||= JSON.parse(response.body)
+    end
+  end
+end
