@@ -5,10 +5,11 @@ SampleApp::Application.routes.draw do
   #     resources :microposts
   #   #end
   # end
-  scope '/api', defaults: {format: 'json'} do
-    resources :users, only:[:show, :index]
-    resources :microposts, only:[:show]
-  end
+  
+  # scope '/api', defaults: {format: 'json'} do
+  #   resources :users, only:[:show, :index]
+  #   resources :microposts, only:[:show]
+  # end
   
   get "microposts/new"
   resources :users do
@@ -17,7 +18,7 @@ SampleApp::Application.routes.draw do
     end
   end
   resources :sessions, only: [:new, :create, :destroy]
-  resources :microposts, only: [:create, :destroy]
+  resources :microposts, only: [:create, :destroy, :show]
   resources :relationships, only: [:create, :destroy]
   root 'static_pages#home'
   match "/help",    to: 'static_pages#help',    via: 'get'
