@@ -14,4 +14,7 @@ FactoryGirl.define do
     content "Lorem ipsum"
     user
   end
+
+  factory :api_key do
+  end
 end
