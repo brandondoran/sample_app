@@ -1,15 +1,9 @@
 SampleApp::Application.routes.draw do
-  # namespace :api, defaults: {format: 'json'} do
-  #   #namespace :v1 do
-  #     resources :users
-  #     resources :microposts
-  #   #end
-  # end
-  
-  # scope '/api', defaults: {format: 'json'} do
-  #   resources :users, only:[:show, :index]
-  #   resources :microposts, only:[:show]
-  # end
+  namespace :api, defaults: {format: 'json'} do
+    namespace :v1 do
+      resources :users
+    end
+  end
   
   get "microposts/new"
   resources :users do
