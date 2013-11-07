@@ -42,5 +42,5 @@ RSpec.configure do |config|
 
   config.include Capybara::DSL
 
-  config.include Requests::JsonHelpers, type: :request
+  config.include Requests::JsonHelpers
 end

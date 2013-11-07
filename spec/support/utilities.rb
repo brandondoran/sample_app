@@ -14,6 +14,10 @@ def sign_in(user, options={})
   end
 end
 
+def authorize_request(token)
+  request.env['AUTHORIZATION'] = "Token token='#{token.access_token}'"
+end
+
 module Requests
   module JsonHelpers
     def json

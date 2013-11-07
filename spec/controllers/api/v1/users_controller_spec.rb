@@ -17,25 +17,30 @@ module Api
 
 			context "JSON" do
 				describe "index" do
-					before do
-						@request.env['Authorization'] = "Token token='#{token.access_token}'"
-						pp token.access_token
-						get :index, :format => :json#, {'Authorization' => 'Token token=#{token.access_token}'}
+					# describe "unauthorized" do
+					# 	before { get :index, :format => :json }
+					# 	it { expect(response.status).to eq(401) }
+					# end
 
-						pp response.body
+					describe "authorized" do
+						before do
+							authorize_request(token)
+							get :index, :format => :json
+						end
+
+						it 'should be valid' do
+	  					expect(response).to be_success
+						end	
+
+						it { expect(json['page_num']).to eq(1) }
+						it { expect(json['total']).to eq(1) }
+						it { expect(json['users'][0]['user']['id']).to eq(user.id) }
 					end
-
-					it 'should be valid' do
-  					expect(response).to be_success
-					end	
-
-					it { expect(json['page_num']).to eq(1) }
-					it { expect(json['total']).to eq(1) }
-					it { expect(json['users'][0]['user']['id']).to eq(user.id) }
 				end
 
 				describe "show" do
 					before do 
+						authorize_request(token)
 						get :show, :id => user, :format => :json
 					end
 
