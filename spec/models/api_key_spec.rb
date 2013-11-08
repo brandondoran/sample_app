@@ -1,5 +1,11 @@
 require 'spec_helper'
 
 describe ApiKey do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:token) { FactoryGirl.create(:api_key)}
+
+  subject { token }
+
+  it { should respond_to(:access_token) }
+  
+  it { should be_valid }
 end
