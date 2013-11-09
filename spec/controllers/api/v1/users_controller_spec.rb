@@ -76,6 +76,18 @@ module Api
 						end
 					end
 				end
+
+				describe "create" do
+					before do
+						authorize_request(token)
+						post 'users/new', nil, :format => :json
+						pp response
+					end
+
+					it 'should be valid' do
+  					expect(response).to be_success
+					end	
+				end
 			end
 		end
 	end
